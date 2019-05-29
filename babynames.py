@@ -102,11 +102,19 @@ def main():
     # option flag
     create_summary = args.summaryfile
 
-    # +++your code here+++
     # For each filename, get the names, then either print the text output
     # or write it to a summary file
+
     for file in file_list:
-        extract_names(file)
+        names_and_ranks = extract_names(file)
+        output_text = '\n'.join(names_and_ranks)
+
+        if create_summary:
+            output_file = open(file + '.summary', 'w')
+            output_file.write(output_text + '\n')
+            output_file.close()
+        else:
+            print(output_text)
 
 
 if __name__ == '__main__':
